@@ -1,11 +1,14 @@
 name: Build iOS IPA
 on:
   push:
-    branches: [ master ] # Chạy khi bạn push code lên branch master
+    branches: [ master, main ]
 
 jobs:
   build:
     runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./Aron-AI-Assistant-main
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -22,18 +25,15 @@ jobs:
         run: npm run build
 
       - name: Capacitor Sync
-        run: |
-          npx cap sync ios
+        run: npx cap sync ios
 
       - name: Build App (IPA)
         run: |
           cd ios/App
           xcodebuild -workspace App.xcworkspace -scheme App -sdk iphoneos -configuration Release archive -archivePath App.xcarchive
-          # Lưu ý: Bước này sẽ tạo ra folder build, nhưng để có .ipa chuẩn cần certificate.
-          # Tuy nhiên, GitHub sẽ xuất ra folder .app mà Sideloadly vẫn có thể nhận.
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: ios-build
-          path: ios/App/App.xcarchive
+          path: Aron-AI-Assistant-main/ios/App/App.xcarchive
