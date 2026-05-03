@@ -1,0 +1,6 @@
+{
+  "appId": "app.vercel.aronaiast01",
+  "appName": "Aron- Ai Assistant",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
