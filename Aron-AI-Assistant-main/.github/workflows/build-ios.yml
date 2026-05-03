@@ -1,7 +1,7 @@
 name: Build iOS IPA
 on:
   push:
-    branches: [ master ] # Chạy khi bạn push code lên branch master
+    branches: [ main,master ] # Chạy khi bạn push code lên branch master
 
 jobs:
   build:
